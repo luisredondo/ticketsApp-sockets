@@ -44,18 +44,22 @@ class TicketControl {
         return `Ticket: ${this.ultimo}`;
     }
 
+    getUltimos4() {
+        return this.ultimos4;
+    }
+
     atenderTicket(escritorio) {
         if (this.tickets.length === 0) {
             return 'No hay tickets';
         }
 
-        let numeroTicket = this.tickets[0];
+        let numeroTicket = this.tickets[0].numero;
 
         this.tickets.shift();
 
-        let atenderTicket = new Ticket(numeroTicket, escritorio);
+        let AtenderTicket = new Ticket(numeroTicket, escritorio);
 
-        this.ultimos4.unshift(atenderTicket);
+        this.ultimos4.unshift(AtenderTicket);
 
         if (this.ultimos4.length > 4) {
             this.ultimos4.splice(-1, 1);
@@ -66,7 +70,7 @@ class TicketControl {
 
         this.grabarArchivo();
 
-        return atenderTicket;
+        return AtenderTicket;
 
     }
 

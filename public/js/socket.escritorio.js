@@ -1,6 +1,5 @@
 var socket = io();
 
-
 var searchParams = new URLSearchParams(window.location.search);
 
 if (!searchParams.has('escritorio')) {
@@ -9,7 +8,7 @@ if (!searchParams.has('escritorio')) {
 }
 
 var escritorio = searchParams.get('escritorio');
-const label = $('small');
+var label = $('small');
 
 $('h1').text('Escritorio ' + escritorio);
 
@@ -20,7 +19,14 @@ $('button').on('click', function() {
         },
         function(resp) {
 
+            if (resp === 'No hay tickets') {
+                label.text(resp);
+                alert(resp);
+                return;
+            }
+
             console.log(resp);
+            label.text('Ticket ' + resp.numero);
 
         });
 
